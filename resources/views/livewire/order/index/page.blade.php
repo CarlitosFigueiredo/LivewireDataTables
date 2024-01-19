@@ -1,5 +1,5 @@
-<div class="w-full flex flex-col gap-8">
-    <table class="min-w-full table-fixed divide-y divide-gray-300 text-gray-800">
+<div>
+    <table class="mx-auto bg-white shadow-md rounded my-1">
         <thead>
             <tr>
                 <th class="p-3 text-left text-sm font-semibold text-gray-900">
@@ -62,4 +62,13 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pt-4 flex justify-between items-center">
+        <div class="text-gray-700 text-sm">
+
+            Results: {{ \Illuminate\Support\Number::format($orders->total()) }}
+        </div>
+
+        {{ $orders->links('livewire.order.index.pagination') }}
+    </div>
 </div>

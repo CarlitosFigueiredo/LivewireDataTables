@@ -10,8 +10,7 @@
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     </head>
     <body>
-        <main class="container-md flex items-center">
-
+        <main class="flex items-center justify-center">
             {{ $slot }}
         </main>
     </body>
