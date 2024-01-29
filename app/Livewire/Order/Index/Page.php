@@ -11,18 +11,16 @@ use App\Models\Order;
 class Page extends Component
 {
     use WithPagination;
-
     public Store $store;
-
     public $search = '';
-
     #[Url]
     public $sortCol;
-
     #[Url]
     public $sortAsc = false;
 
     public $selectedOrderIds = [];
+
+    public $orderIdsOnPage = [];
 
     public function updatedSearch()
     {
@@ -37,7 +35,6 @@ class Page extends Component
     public function refundSelected()
     {
         $orders = $this->store->orders()->whereIn('id', $this->selectedOrderIds)->get();
-
         foreach ($orders as $order) {
             $this->refund($order);
         }
@@ -46,14 +43,12 @@ class Page extends Component
     public function refund(Order $order)
     {
         $this->authorize('update', $order);
-
         $order->refund();
     }
 
     public function archiveSelected()
     {
         $orders = $this->store->orders()->whereIn('id', $this->selectedOrderIds)->get();
-
         foreach ($orders as $order) {
             $this->archive($order);
         }
@@ -62,7 +57,6 @@ class Page extends Component
     public function archive(Order $order)
     {
         $this->authorize('update', $order);
-
         $order->archive();
     }
 
@@ -85,10 +79,8 @@ class Page extends Component
                 'date' => 'ordered_at',
                 'amount' => 'amount',
             };
-
             $query->orderBy($column, $this->sortAsc ? 'asc' : 'desc');
         }
-
         return $query;
     }
 
@@ -104,13 +96,17 @@ class Page extends Component
     public function render()
     {
         $query = $this->store->orders();
-
         $query = $this->applySearch($query);
+
         $query = $this->applySorting($query);
+
+        $orders = $query->paginate(5);
+
+        $this->orderIdsOnPage = $orders->map(fn ($order) => (string) $order->id)->toArray();
 
         return view('livewire.order.index.page', [
 
-            'orders' => $query->paginate(10),
+            'orders' => $orders,
         ]);
     }
 }

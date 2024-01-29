@@ -19,8 +19,10 @@
             <table class="mx-auto bg-white shadow-md rounded my-1">
                 <thead>
                     <tr>
-                        <th>
-                            {{-- Checkboxes... --}}
+                        <th class="p-3 text-left text-sm font-semibold text-gray-900">
+                            <div class="flex items-center">
+                                <x-order.index.check-all />
+                            </div>
                         </th>
 
                         <th class="p-3 text-left text-sm font-semibold text-gray-900">
