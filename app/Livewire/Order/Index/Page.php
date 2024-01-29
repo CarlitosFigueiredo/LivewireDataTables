@@ -11,14 +11,31 @@ class Page extends Component
     use WithPagination;
 
     public Store $store;
+    public $search = '';
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    protected function applySearch($query)
+    {
+        return $this->search === ''
+            ? $query
+            : $query
+                ->where('email', 'like', '%' . $this->search . '%')
+                ->orWhere('number', 'like', '%' . $this->search . '%');
+    }
 
     public function render()
     {
-        sleep(1);
+        $query = $this->store->orders();
+
+        $query = $this->applySearch($query);
 
         return view('livewire.order.index.page', [
 
-            'orders' => $this->store->orders()->paginate(10),
+            'orders' => $query->paginate(10),
         ]);
     }
 }
