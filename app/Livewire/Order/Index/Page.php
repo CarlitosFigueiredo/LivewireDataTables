@@ -6,7 +6,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Store;
-
+use App\Models\Order;
 
 class Page extends Component
 {
@@ -24,6 +24,20 @@ class Page extends Component
     public function updatedSearch()
     {
         $this->resetPage();
+    }
+
+    public function refund(Order $order)
+    {
+        $this->authorize('update', $order);
+
+        $order->refund();
+    }
+
+    public function archive(Order $order)
+    {
+        $this->authorize('update', $order);
+
+        $order->archive();
     }
 
     public function sortBy($column)

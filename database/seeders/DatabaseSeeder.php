@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create([
             'name' => 'Carlos Yuri',
             'email' => 'medeirosfigueiredoc@gmail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$12$OYW105205JeDi5z3NmzDJuADej9oS2K5.JDMb.O0ptsH8hhxcrxB.', // password
         ]);
 
         \App\Models\Store::create([

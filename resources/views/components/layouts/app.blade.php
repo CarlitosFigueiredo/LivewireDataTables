@@ -6,8 +6,10 @@
 
         <title>{{ $title ?? 'Data Tables' }}</title>
 
-        {{-- @vite('resources/css/app.css') --}}
+        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.1-beta.0/dist/cdn.min.js"></script>
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+        {{-- @vite('resources/css/app.css') --}}
     </head>
     <body>
         <main class="flex items-center justify-center">
