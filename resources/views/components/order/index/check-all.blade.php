@@ -18,11 +18,9 @@
 
                     updateCheckAllState() {
                         if (this.pageIsSelected()) {
-
                             this.$refs.checkbox.checked = true
                             this.$refs.checkbox.indeterminate = false
                         } else if (this.pageIsEmpty()) {
-
                             this.$refs.checkbox.checked = false
                             this.$refs.checkbox.indeterminate = false
                         } else {
