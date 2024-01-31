@@ -12,7 +12,7 @@
         {{-- @vite('resources/css/app.css') --}}
     </head>
     <body>
-        <main class="flex items-center justify-center">
+        <main class="flex items-center justify-center py-8">
             {{ $slot }}
         </main>
     </body>
