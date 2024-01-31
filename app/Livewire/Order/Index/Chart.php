@@ -3,8 +3,6 @@
 namespace App\Livewire\Order\Index;
 
 use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use App\Models\Store;
 
@@ -15,9 +13,11 @@ class Chart extends Component
 
     public function fillDataset()
     {
+        $this->store = Store::find(1);
+
         $results = $this->store->orders()
             ->select(
-                DB::raw("strftime('%Y', ordered_at) || '-' || strftime('%m', ordered_at) as increment"),
+                DB::raw("DATE_FORMAT(ordered_at, '%Y-%m') as increment"),
                 DB::raw('SUM(amount) as total'),
             )
             ->groupBy('increment')
